@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/DAX-Analytics-blue?style=for-the-badge" alt="DAX" />
   <img src="https://img.shields.io/badge/Power_Query-Data_Transformation-5B2C83?style=for-the-badge" alt="Power Query" />
   <img src="https://img.shields.io/badge/Excel-Data_Source-217346?style=for-the-badge&logo=microsoft-excel&logoColor=white" alt="Excel" />
-  <img src="https://img.shields.io/badge/Data_Model-Star_Schema-success?style=for-the-badge" alt="Star Schema" />
+  <img src="https://img.shields.io/badge/Data_Model-Snowflake_Schema-success?style=for-the-badge" alt="Snowflake Schema" />
 </p>
 
 ---
@@ -82,22 +82,22 @@ The executive-level view of the business, bringing the main performance indicato
 
 ---
 
-### 3. Country Analysis
+### 3. Customer Analysis
 
-A geographic view of sales performance that supports market-level comparison and opportunity identification.
+A customer-centric view of sales performance supporting contribution analysis, customer-level investigation, and identification of high-value accounts.
 
 <p align="center">
-  <img src="./Dashboard%20Previews/Country%20Page.png" width="92%" alt="PULSE Analytics — Country Analysis" />
+  <img src="./Dashboard%20Previews/Customer Page.png" width="92%" alt="PULSE Analytics — Customer Analysis" />
 </p>
 
 ---
 
-### 4. Customer Analysis
+### 4. Country Analysis
 
-A customer-centric view of sales performance supporting contribution analysis and customer-level investigation.
+A geographic view of sales performance that supports market-level comparison, concentration analysis, and opportunity identification.
 
 <p align="center">
-  <img src="./Dashboard%20Previews/Customer%20Page.png" width="92%" alt="PULSE Analytics — Customer Analysis" />
+  <img src="./Dashboard%20Previews/Country Page.png" width="92%" alt="PULSE Analytics — Country Analysis" />
 </p>
 
 ---
@@ -132,9 +132,9 @@ The semantic-model view showing how the sales fact table connects to the analyti
 
 ---
 
-## 🏗️ Data Architecture — Star Schema
+## 🏗️ Data Architecture — Snowflake Schema
 
-The solution follows a **Star Schema** centered on the sales transaction fact table.
+The solution follows a **Snowflake Schema** centered on the `fact_sales` transaction table. The model uses normalized dimension structures so related descriptive attributes are separated into their own dimension tables rather than keeping every hierarchy in a single flat dimension.
 
 ### Fact Table
 
@@ -143,35 +143,40 @@ The solution follows a **Star Schema** centered on the sales transaction fact ta
 ### Dimension Tables
 
 - `dim_date`
-- `dim_country`
 - `dim_customer`
+- `dim_country`
 - `dim_product`
 - `dim_category`
 
-The model separates transactional activity from descriptive attributes, making the report easier to filter, aggregate, maintain, and extend.
+### Model Logic
+
+The sales fact table provides the central transactional layer, while the dimensions provide reusable analytical context. The product hierarchy is normalized through the separate **Category → Product** structure, giving the model its snowflake characteristics.
 
 ```
-                    ┌─────────────────┐
-                    │    dim_date     │
-                    └────────┬────────┘
-                             │
-┌─────────────────┐          │          ┌─────────────────┐
-│  dim_country    │          │          │   dim_customer  │
-└────────┬────────┘          │          └────────┬────────┘
-         │                   │                   │
-         └──────────────┐    │    ┌──────────────┘
-                        ▼    ▼    ▼
-                    ┌───────────────┐
-                    │  fact_sales   │
-                    └───────┬───────┘
-                            │
-                   ┌────────┴────────┐
-                   ▼                 ▼
-          ┌────────────────┐  ┌────────────────┐
-          │   dim_product  │  │  dim_category  │
-          └────────────────┘  └────────────────┘
+                         ┌─────────────────┐
+                         │    dim_date     │
+                         └────────┬────────┘
+                                  │
+┌─────────────────┐               │               ┌─────────────────┐
+│  dim_customer   │               │               │  dim_country    │
+└────────┬────────┘               │               └────────┬────────┘
+         │                         │                        │
+         └──────────────────┐      │      ┌────────────────┘
+                            ▼      ▼      ▼
+                         ┌──────────────────┐
+                         │    fact_sales    │
+                         └────────┬─────────┘
+                                  │
+                         ┌────────▼────────┐
+                         │   dim_product   │
+                         └────────┬────────┘
+                                  │
+                         ┌────────▼────────┐
+                         │   dim_category  │
+                         └─────────────────┘
 ```
 
+This architecture supports reusable filtering, hierarchical analysis, consistent DAX calculations, and scalable reporting across the dashboard.
 ---
 
 ## 📁 Repository Structure
@@ -187,8 +192,8 @@ PULSE-Analytics/
 ├── Dashboard Previews/
 │   ├── Landing Page.png
 │   ├── Overview Page.png
-│   ├── Country Page.png
 │   ├── Customer Page.png
+│   ├── Country Page.png
 │   ├── Products Page.png
 │   ├── Recommendation Page.png
 │   └── Model Page.png
@@ -216,7 +221,7 @@ PULSE-Analytics/
 | **DAX** | Measures, KPIs, analytical calculations, and business logic |
 | **Power Query** | Data preparation, transformation, and loading |
 | **Microsoft Excel** | Source data storage and structured fact/dimension inputs |
-| **Star Schema** | Semantic-model architecture for scalable analysis |
+| **Snowflake Schema** | Normalized semantic-model architecture for scalable analysis |
 
 ---
 
@@ -229,13 +234,13 @@ Power Query
       ↓
 Data Cleaning & Transformation
       ↓
-Star Schema Modeling
+Snowflake Schema Modeling
       ↓
 DAX Measures & Business Logic
       ↓
 Interactive Power BI Report
       ↓
-Sales / Country / Customer / Product Analysis
+Sales / Customer / Country / Product Analysis
       ↓
 Business Recommendations
 ```
@@ -281,7 +286,7 @@ The dimensional model allows analytical logic to be reused consistently across r
 
 The report follows a structured storytelling sequence:
 
-**Landing → Overview → Country → Customer → Products → Recommendations → Model**
+**Landing → Overview → Customer → Country → Products → Recommendations → Model**
 
 This makes the solution suitable for:
 
