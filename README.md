@@ -1,10 +1,10 @@
 # 📊 PULSE Analytics — E-Commerce Sales & Customer Intelligence Dashboard
 
-<p align="center">
+<p align=center>
   <b>Enterprise E-Commerce Sales Intelligence, Customer RFM Segmentation, Basket Composition & What-If Predictive Simulation in Power BI</b>
 </p>
 
-<p align="center">
+<p align=center>
   <img src="https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black" alt="Power BI" />
   <img src="https://img.shields.io/badge/DAX-Time_Intelligence_&_What--If-blue?style=for-the-badge" alt="DAX" />
   <img src="https://img.shields.io/badge/Data_Modeling-Snowflake_Schema-success?style=for-the-badge" alt="Data Modeling" />
@@ -16,349 +16,225 @@
 
 ## 📌 Executive Overview
 
-The **PULSE Analytics E-Commerce Sales & Customer Intelligence Dashboard** is an enterprise-grade commercial decision-support platform engineered in **Microsoft Power BI**. Designed for digital retail executives, commercial strategists, and marketing directors, it translates granular transactional line items, global multi-currency checkout events, customer behavioral profiles, and catalog performance into high-impact operational intelligence.
+The **PULSE Analytics E-Commerce Sales & Customer Intelligence Dashboard** is an enterprise-grade commercial decision-support platform engineered in **Microsoft Power BI**. Designed for digital retail executives, commercial strategists, and marketing directors, it translates granular transactional line items, regional sales across West African markets, customer behavioral tiers, and catalog performance into high-impact operational intelligence.
 
-The platform monitors **15,670 orders** encompassing **62,810 order items** placed by **1,000 unique customers** across **10 international markets**, governing **$3,293,892.40 (~$3.29M) in gross merchandise value (GMV)**. It bridges the gap between historical retrospective reporting and proactive predictive planning through dynamic What-If parameter simulation.
+The platform monitors **11,000 distinct orders** comprising **21,931 line items** and **65,713 units sold** across **500 registered customers** in **4 international markets**, governing **6,549,730.00 (~6.55M) in gross revenue**. It bridges the gap between historical retrospective reporting and proactive predictive planning through dynamic What-If parameter simulation.
 
-```
-+----------------------------------------------------------------------------------------------------+
-|                                    EXECUTIVE PORTFOLIO AT A GLANCE                                 |
-+--------------------------+--------------------------+-----------------------+----------------------+
-|    $3,293,892.40 Gross   |       15,670 Orders      |    1,000 Customers    |   $210.20 Mean AOV   |
-|   62,810 Items Shipped   |   4.01 Items / Basket    |  10 Global Territories|   3.44% Conversion   |
-+--------------------------+--------------------------+-----------------------+----------------------+
-```
+
 
 ---
 
 ## 📊 Commercial Financial Summary & Core KPIs
 
-The enterprise scorecard synthesizes transactional velocity, monetization ratios, and operational volume:
+The enterprise scorecard synthesizes transactional velocity, monetization ratios, and operational volume derived directly from the underlying data:
 
-| Key Performance Indicator | Portfolio Value | Benchmark / Formula | Strategic Commercial Impact |
+| Key Performance Indicator | Portfolio Value | Verified DAX Formula | Strategic Commercial Impact |
 | :--- | :---: | :---: | :--- |
-| **Gross Revenue (GMV)** | **$3,293,892.40** | `SUM(fact_order_items[item_price])` | Baseline gross commercial sales across all processed customer checkouts |
-| **Total Order Volume** | **15,670 Orders** | `DISTINCTCOUNT(fact_orders[order_id])` | Validated completed digital storefront transactions |
-| **Total Units Shipped** | **62,810 Items** | `SUM(fact_order_items[quantity])` | Total physical merchandise units fulfilled through logistics centers |
-| **Active Customer Base** | **1,000 Accounts** | `DISTINCTCOUNT(dim_customers[customer_id])` | Global verified consumer accounts generating recurring transactions |
-| **Average Order Value (AOV)** | **$210.20** | `[Total Revenue] / [Total Orders]` | Mean financial basket realization per completed storefront purchase |
-| **Average Order Items (AOI)** | **4.01 Items** | `[Total Quantity] / [Total Orders]` | Average merchandise depth per order delivery |
-| **Storefront Conversion Rate** | **3.44%** | `[Total Orders] / [Total Sessions]` | End-to-end checkout funnel efficiency from session arrival to completed buy |
-| **MoM Order Growth** | **+4.12%** | `DIVIDE([Total Orders] - [SPLM Orders], [SPLM Orders])` | Period-over-period order acceleration benchmark |
-| **MoM Revenue Growth** | **+3.85%** | `DIVIDE([Total Revenue] - [SPLM Revenue], [SPLM Revenue])` | Top-line sales trajectory tracked against same period last month |
-| **Active Product Catalog** | **50 SKUs** | `DISTINCTCOUNT(dim_products[product_id])` | 5 core categories with tracked inventory velocity |
-| **Geographic Markets** | **10 Countries** | `DISTINCTCOUNT(dim_country[country_id])` | International shipping coverage across North America, Europe & APAC |
+| **Gross Total Revenue** | **6,549,730.00** |  | Total gross commercial revenue across all completed customer orders |
+| **Total Order Volume** | **11,000 Orders** |  | Validated completed digital storefront transactions |
+| **Total Units Shipped** | **65,713 Units** |  | Total physical merchandise units fulfilled through distribution centers |
+| **Total Line Items** | **21,931 Items** |  | Line-item transaction records processed across the catalog |
+| **Active Customer Base** | **500 Accounts** |  | Verified accounts generating recurring transactions |
+| **Total Customer Visits** | **2,858 Visits** |  | Aggregate recorded storefront customer engagements |
+| **Average Visits / Customer** | **5.72 Visits** |  | Mean visit frequency per customer profile |
+| **Storefront Seen Count** | **63,783.79 Views** |  | Total catalog and storefront view impressions |
+| **Storefront Conversion Rate** | **17.25%** |  | Checkout funnel efficiency from storefront impressions to completed order |
+| **Average Order Value (AOV)** | **,413.61** |  | Mean gross spend realized per completed customer order |
+| **Average Order Quantity (AOQ)** | **5.97 Units** |  | Average volume of items purchased per basket |
+| **Average Order Items (AOI)** | **1.99 Lines** |  | Average unique SKU line-item depth per customer basket |
+| **Revenue per Customer** | **3,099.46** |  | Lifetime value realization per active customer |
+| **Revenue per Visit** | **,289.62** |  | Revenue yield generated per storefront visit session |
+| **Orders per Customer** | **22.00 Orders** |  | High-frequency repeat purchasing velocity across the customer base |
 
 ---
 
-## 👥 Customer Loyalty & RFM Tier Segmentation
+## 👥 Customer Loyalty & Behavioral Tier Segmentation
 
-The customer portfolio is categorized across automated behavioral value tiers to detect retention risk and unlock cross-sell potential:
+Customers are categorized across automated behavioral value tiers based on order frequency, revealing deep repeat-purchase loyalty:
 
-| Loyalty Tier | Customer Share | Revenue Contribution | Mean Spend / Customer | Retention & Engagement Strategy |
-| :--- | :---: | :---: | :---: | :--- |
-| **Platinum (VIP)** | **14.2%** | **$1,185,420 (36.0%)** | **$8,348.00** | Dedicated loyalty concierge, early access drops, zero-fee expedited shipping |
-| **Gold (High Value)** | **28.6%** | **$1,054,045 (32.0%)** | **$3,685.50** | Category cross-sell incentives, personalized bundle discounts, quarterly milestones |
-| **Silver (Mid Tier)** | **35.4%** | **$757,595 (23.0%)** | **$2,140.10** | Re-engagement automation, basket-building free-shipping threshold prompts |
-| **Bronze (Occasional)** | **21.8%** | **$296,832 (9.0%)** | **$1,361.60** | Win-back promotional campaigns, onboarding drip sequences, low-friction entry SKUs |
+| Loyalty Tier | Customers | Customer Share | Orders | Gross Revenue | Revenue Share | Mean Spend / Customer | Orders / Customer |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Loyal Repeat (22–27 Orders)** | **184** | **36.8%** | 4,460 | **0,799,000.00** | **40.67%** | **8,690.22** | 24.24 |
+| **Core Buyer (16–21 Orders)** | **212** | **42.4%** | 4,007 | **,523,690.00** | **35.87%** | **4,923.07** | 18.90 |
+| **VIP Champion (28+ Orders)** | **69** | **13.8%** | 2,047 | **,019,180.00** | **18.90%** | **2,741.74** | 29.67 |
+| **Occasional (Under 16 Orders)** | **35** | **7.0%** | 486 | **,207,860.00** | **4.55%** | **4,510.29** | 13.89 |
+| **Total / Overall** | **500** | **100.0%** | **11,000** | **6,549,730.00** | **100.0%** | **3,099.46** | **22.00** |
 
----
-
-## 🛍️ Product Assortment & Commercial Yield Performance
-
-Catalog distribution reveals revenue concentration across primary merchandise categories:
-
-| Product Category | Revenue Share | Units Sold | Mean Category AOV | Margin Contribution | Key Strategic Dynamic |
-| :--- | :---: | :---: | :---: | :---: | :--- |
-| **Electronics & Hardware** | **38.4% ($1.26M)** | 14,210 | $285.40 | High | Top GMV generator; drives highest basket values but sensitive to price promos |
-| **Fashion & Apparel** | **24.1% ($794K)** | 21,450 | $164.20 | Medium | Highest order velocity and unit throughput; highest repeat replenishment rate |
-| **Home & Living** | **18.7% ($616K)** | 11,890 | $215.10 | High | Steady seasonal cadence; strong attachment to bundle promotions |
-| **Beauty & Personal Care** | **11.2% ($369K)** | 9,840 | $132.80 | High | Strongest recurring subscription potential; prime candidate for auto-ship programs |
-| **Sports & Outdoors** | **7.6% ($250K)** | 5,420 | $188.50 | Medium | High summer/holiday seasonality; strong regional variance in cold vs. warm climates |
+### Strategic Tier Insights
+1. **High Repeat Engagement:** Over **93% of the customer base** sits in the Core, Loyal Repeat, or VIP tiers (16+ orders), demonstrating exceptional platform stickiness and product retention.
+2. **VIP Revenue Powerhouse:** 69 VIP Champions generate **.02M (18.9%)** at an average spend of **2,741.74**, making dedicated retention and high-touch account management paramount.
+3. **Core Backbone:** Core Buyers and Loyal Repeat customers represent **76.54% of total revenue (0.32M)** across 8,467 orders.
 
 ---
 
-## 🌍 Geographic Penetration & Global Footprint
+## 🛍️ Product Catalog & Category Performance
 
-Cross-border sales analysis tracks market maturity and expansion runway across 10 regions:
+The merchandise catalog spans 3 core product categories and 7 high-value SKUs:
 
-- **United States & Canada:** Anchor market generating **52.3% of cumulative sales**, characterized by high AOV ($234.50) and mature multi-line basket depth.
-- **European Region (UK, Germany, France, Netherlands):** Represents **31.8% of GMV**, with Germany and the UK exhibiting the fastest MoM transaction growth (+6.2%).
-- **Asia-Pacific & Emerging Markets (Australia, Japan, Singapore, Brazil):** Generates **15.9% of portfolio revenue**, exhibiting high conversion potential (4.1% in Singapore) and prime expansion runway.
+| Product Category | Category Key | Gross Revenue | Revenue Share | Line Items | Units Sold | Dominant Driver |
+| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| **Electronics** | 1 | **7,223,650.00** | **64.87%** | 9,257 | 27,839 | Laptop (.26M) & Smartphone (.59M) |
+| **Furniture** | 3 | **,765,600.00** | **21.72%** | 6,410 | 19,196 | Table (.85M) & Chair (.91M) |
+| **Home Appliance** | 2 | **,560,480.00** | **13.41%** | 6,264 | 18,678 | Microwave (.82M) & Blender (43K) |
+
+### SKU-Level Breakdown
+
+| SKU Name | Key | Unit Price | Units Sold | Line Items | Total Revenue | Seen Count | Purchase Yield |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Laptop** | P001 | ,000 | 9,257 | 3,059 | **,257,000.00** | 2,500 | 4.40 |
+| **Smartphone** | P005 | 00 | 9,417 | 3,093 | **,591,900.00** | 3,500 | 3.14 |
+| **Table** | P007 | 00 | 9,632 | 3,205 | **,852,800.00** | 1,600 | 6.88 |
+| **Microwave** | P006 | 00 | 9,392 | 3,157 | **,817,600.00** | 1,000 | 11.00 |
+| **Chair** | P004 | 00 | 9,564 | 3,205 | **,912,800.00** | 3,000 | 3.67 |
+| **Headphones** | P002 | 50 | 9,165 | 3,105 | **,374,750.00** | 1,800 | 6.11 |
+| **Blender** | P003 | 0 | 9,286 | 3,107 | **42,880.00** | 1,200 | 9.17 |
 
 ---
 
-## 💡 In-Depth Financial Analysis & Key Insights
+## 🌍 Geographic Penetration & Regional Footprint
 
-1. **80/20 Revenue Concentration in Top Tiers:** The combined Platinum and Gold cohorts comprise only **42.8% of the customer base** yet drive **68.0% of total gross sales ($2.24M)**. Safeguarding this segment against attrition is the primary lever for revenue stability.
-2. **Basket Density Directly Correlates to Margin Health:** Orders with **4+ line items** generate an average AOV of **$312.40** compared to **$98.50** for single-item checkouts. Implementing threshold-based incentives ("Add $35 for Free Priority Delivery") captures immediate incremental margin.
-3. **MoM Rebound Across Core Categories:** Month-over-month order expansion of **+4.12%** outpaced revenue growth (+3.85%), indicating sustained customer acquisition velocity with slight price-mix softening toward entry-level catalog items.
-4. **Predictive What-If Sensitivity:** Scenario modeling demonstrates that a **+5.0% lift in storefront conversion** combined with a **+$15 AOV expansion** delivers an estimated **+$246,800.00 in quarterly incremental revenue**.
+Regional performance across 4 West African territories shows balanced commercial distribution:
+
+| Country Market | Key | Total Revenue | Revenue Share | Line Items | Orders | Mean Spend / Order |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Côte d'Ivoire** | 4 | **,909,980.00** | **26.03%** | 5,685 | ~2,850 | ,424.55 |
+| **Ghana** | 1 | **,764,640.00** | **25.48%** | 5,611 | ~2,800 | ,415.94 |
+| **Togo** | 3 | **,750,230.00** | **25.42%** | 5,539 | ~2,795 | ,415.11 |
+| **Benin** | 2 | **,124,880.00** | **23.07%** | 5,096 | ~2,555 | ,397.21 |
+
+---
+
+## 📈 What-If Predictive Simulation Model
+
+The semantic model includes dynamic parameter tables (, ) and DAX measures calculating scenario revenue impacts:
+
+1481	ext{Projected Revenue} = 	ext{Seen Count} 	imes (	ext{Conversion Rate} + \Delta 	ext{Conversion}) 	imes (	ext{AOV} + \Delta 	ext{AOV})1481
+
+### Baseline vs. What-If Scenario (+1.5% Conversion Lift, +50 AOV Expansion)
+
+| Metric | Baseline Value | Simulation Value | Net Expansion / Lift |
+| :--- | :---: | :---: | :---: |
+| **Storefront Conversion Rate** | **17.25%** | **18.75%** (+1.50%) | +8.70% relative conversion gain |
+| **Projected Orders** | **11,000** | **11,957 Orders** | **+957 Incremental Orders** |
+| **Average Order Value (AOV)** | **,413.61** | **,563.61** | **+50.00 / Basket** |
+| **Total Gross Revenue** | **6,549,730.00** | **0,652,384.81** | **+,102,654.81 (+15.45%)** |
 
 ---
 
 ## 📐 Key DAX Measures & Formula Reference
 
-### 1. Volume & Revenue Fundamentals
+The semantic model () features governed, reusable DAX calculations:
 
-```dax
-Total Revenue = 
-SUM(fact_order_items[item_price])
-```
+### 1. Core Volume & Monetization Measures
 
-```dax
-Total Orders = 
-DISTINCTCOUNT(fact_orders[order_id])
-```
 
-```dax
-Total Quantity = 
-SUM(fact_order_items[quantity])
-```
+### 2. Funnel Efficiency & Customer Engagement
 
-```dax
-Total Items = 
-COUNTROWS(fact_order_items)
-```
+
+### 3. Share of Wallet & Benchmarking
+
+
+### 4. What-If Predictive Simulation
+
 
 ---
 
-### 2. Basket Composition & Efficiency Ratios
+## 🖼️ Dashboard Architecture & Visual Tour
 
-```dax
-Average Order Value = 
-DIVIDE([Total Revenue], [Total Orders], 0)
-```
+| Page No. | Report Canvas | Strategic Business Focus |
+| :---: | :--- | :--- |
+| **01** | **Landing Page** | Executive portal navigation, thematic brand styling, and platform architecture overview |
+| **02** | **Overview Page** | Macro financial performance, KPI scorecards (GMV, AOV, Orders), and MoM growth trajectories |
+| **03** | **Customer Page** | Customer loyalty tier distribution, visit frequency, lifetime spend, and repeat order analysis |
+| **04** | **Country Page** | Regional market contribution, international territory ranking, and geographic expansion metrics |
+| **05** | **Products Page** | Category mix, SKU-level price realization, catalog view-to-order yield, and volume velocity |
+| **06** | **Recommendation Page**| What-If predictive simulation sliders (Conversion Lift, AOV Expansion) & incremental revenue |
+| **07** | **Model Page** | Entity-Relationship Diagram (Snowflake Schema), cardinalities, and data dictionary |
 
-```dax
-Average Order Quantity = 
-DIVIDE([Total Quantity], [Total Orders], 0)
-```
+### Visual Gallery
 
-```dax
-Average Order Items = 
-DIVIDE([Total Items], [Total Orders], 0)
-```
-
----
-
-### 3. Time Intelligence & MoM Dynamics
-
-```dax
-SPLM Orders = 
-CALCULATE(
-    [Total Orders],
-    DATEADD(dim_date[Date], -1, MONTH)
-)
-```
-
-```dax
-SPLM Revenue = 
-CALCULATE(
-    [Total Revenue],
-    DATEADD(dim_date[Date], -1, MONTH)
-)
-```
-
-```dax
-Order MoM Growth % = 
-DIVIDE([Total Orders] - [SPLM Orders], [SPLM Orders], 0)
-```
-
-```dax
-Revenue MoM Growth % = 
-DIVIDE([Total Revenue] - [SPLM Revenue], [SPLM Revenue], 0)
-```
+<div align="center">
+  <p><b>01 — Landing Page</b></p>
+  <img src="Dashboard%20Previews/Landing%20Page.png" alt="PULSE Analytics - Landing Page" width="850" />
+  <br/><br/>
+  <p><b>02 — Executive Overview Page</b></p>
+  <img src="Dashboard%20Previews/Overview%20Page.png" alt="PULSE Analytics - Overview Page" width="850" />
+  <br/><br/>
+  <p><b>03 — Customer Intelligence Page</b></p>
+  <img src="Dashboard%20Previews/Customer%20Page.png" alt="PULSE Analytics - Customer Page" width="850" />
+  <br/><br/>
+  <p><b>04 — Country & Geographic Performance Page</b></p>
+  <img src="Dashboard%20Previews/Country%20Page.png" alt="PULSE Analytics - Country Page" width="850" />
+  <br/><br/>
+  <p><b>05 — Product Assortment & Yield Page</b></p>
+  <img src="Dashboard%20Previews/Products%20Page.png" alt="PULSE Analytics - Products Page" width="850" />
+  <br/><br/>
+  <p><b>06 — Recommendation & What-If Simulation Page</b></p>
+  <img src="Dashboard%20Previews/Recommendation%20Page.png" alt="PULSE Analytics - Recommendation Page" width="850" />
+  <br/><br/>
+  <p><b>07 — Data Model Architecture</b></p>
+  <img src="Dashboard%20Previews/Model%20Page.png" alt="PULSE Analytics - Model Page" width="850" />
+</div>
 
 ---
 
-### 4. Conversion & Customer Engagement
+## 🏗️ Data Architecture & Snowflake Schema
 
-```dax
-Storefront Conversion Rate = 
-DIVIDE([Total Orders], [Total Sessions], 0)
-```
+The data model is structured as an optimized **Snowflake Schema** centered on transactional sales events:
 
-```dax
-Revenue per Customer = 
-DIVIDE([Total Revenue], DISTINCTCOUNT(dim_customers[customer_id]), 0)
-```
 
-```dax
-Regional Share of Wallet % = 
-DIVIDE(
-    [Total Revenue],
-    CALCULATE([Total Revenue], ALL(dim_country)),
-    0
-)
-```
+
+### Table Dictionary & Schema Cardinality
+
+| Table Name | Role | Cardinality | Primary / Foreign Keys | Granularity / Attributes |
+| :--- | :---: | :---: | :--- | :--- |
+| **** | Fact | 21,931 rows | PK: <br>FK: , , Mon Oct  5 18:41:54 UTC 2026 | Transactional sales line items with quantity, unit price, total amount, seen count |
+| **** | Dimension | 500 rows | PK: <br>FK:  | Customer profile, total visits, loyalty tier, loyalty sort index |
+| **** | Dimension | 7 rows | PK: <br>FK:  | Product SKU name, price, catalog impressions/seen count |
+| **** | Dimension | 3 rows | PK:  | Merchandise category classification and media URLs |
+| **** | Dimension | 4 rows | PK:  | Regional market naming and national flag assets |
+| **** | Dimension | 365 rows | PK:  | Comprehensive date intelligence calendar dimension |
+| **** | Parameter | Dynamic | Numeric Series | What-If conversion rate variance slider (+0.0% to +5.0%) |
+| **** | Parameter | Dynamic | Numeric Series | What-If AOV variance slider (+bash to +00) |
 
 ---
 
-### 5. What-If Predictive Simulation Modeling
+## 🔄 ETL Pipeline & Data Transformation
 
-```dax
-Projected Revenue = 
-VAR TargetAOV = [Average Order Value] * (1 + 'WhatIf_AOV'[AOV_Value])
-VAR TargetOrders = [Total Orders] * (1 + 'WhatIf_Conversion'[Conversion_Value])
-RETURN
-TargetAOV * TargetOrders
-```
-
-```dax
-Projected Incremental Gain = 
-[Projected Revenue] - [Total Revenue]
-```
-
----
-
-## 🎯 Business Problem & Objectives
-
-- **Fragmented Commercial Visibility:** Prior to this implementation, executive leadership lacked unified visibility across transactional sales, geographic velocity, and product profitability.
-- **Customer Segmentation Blind Spots:** Marketing teams were deploying uniform, non-differentiated campaigns without automated behavioral RFM clustering, leading to wasted ad spend.
-- **Reactive Financial Planning:** Scenario projections were managed in static offline spreadsheets, preventing live sensitivity analysis of pricing and conversion adjustments.
-- **The Solution:** A centralized, multi-page Power BI intelligence system combining automated dimensional modeling, dynamic time intelligence, and real-time parameter simulation.
-
----
-
-## 🖼️ Dashboard Visual Tour & Storytelling
-
-### 1. Executive Landing & Navigation Hub
-The primary portal directing users seamlessly across operational, regional, customer, and predictive views with persistent breadcrumb navigation.
-![Executive Landing Page](Dashboard%20Previews/Landing%20Page.png)
-
----
-
-### 2. Commercial Overview & Executive KPIs
-Comprehensive executive scorecard featuring high-level KPIs, revenue trends, period-over-period variances, and category distributions.
-![Commercial Overview](Dashboard%20Previews/Overview%20Page.png)
-
----
-
-### 3. Customer Intelligence & Loyalty Tiers
-In-depth cohort analysis classifying customers by RFM scores, lifetime transaction value, repeat order frequency, and retention hazard.
-![Customer Intelligence](Dashboard%20Previews/Customer%20Page.png)
-
----
-
-### 4. Regional & Geographic Penetration
-Interactive geospatial intelligence showing cross-border revenue share, local order volume, and international fulfillment velocity across 10 countries.
-![Regional Performance](Dashboard%20Previews/Country%20Page.png)
-
----
-
-### 5. Product Assortment & Yield Performance
-SKU-level performance matrix identifying category demand leaders, margin contributors, volume movers, and slow-moving inventory alerts.
-![Product Performance](Dashboard%20Previews/Products%20Page.png)
-
----
-
-### 6. Strategic Recommendations & What-If Simulation
-Predictive parameter sliders enabling leadership to test conversion rate uplifts and AOV expansions to project forward-looking revenue impact.
-![Recommendation & Simulation](Dashboard%20Previews/Recommendation%20Page.png)
-
----
-
-### 7. Enterprise Snowflake Schema Data Model
-The underlying dimensional schema illustrating fact-to-dimension relationships, cardinality, and cross-filtering design.
-![Data Model Schema](Dashboard%20Previews/Model%20Page.png)
-
----
-
-## 🏗️ Data Architecture & Star Schema
-
-The reporting engine is built on a clean **Snowflake Schema** ensuring 1-to-many unidirectional filtering and optimal VertiPaq compression.
-
-### 📐 Schema Architecture Diagram
-
-```
-                             +-------------------+
-                             |     dim_date      |
-                             +-------------------+
-                                       | 1
-                                       | 
-                                       | *
-+------------------+ 1       * +-------------------+ *       1 +------------------+
-|  dim_customers   |-----------|    fact_orders    |-----------|   dim_country    |
-+------------------+           +-------------------+           +------------------+
-                                       | 1
-                                       | 
-                                       | *
-                               +-------------------+ *       1 +------------------+
-                               | fact_order_items  |-----------|   dim_products   |
-                               +-------------------+           +------------------+
-                                                                        | *
-                                                                        | 1
-                                                               +------------------+
-                                                               |  dim_categories  |
-                                                               +------------------+
-```
-
-### Table Specifications:
-
-- **`fact_orders`**: Transaction-level header data (`order_id`, `customer_id`, `order_date`, `country_id`, `payment_method`, `channel`).
-- **`fact_order_items`**: Line-item granularity (`order_item_id`, `order_id`, `product_id`, `quantity`, `item_price`, `discount_amount`).
-- **`dim_customers`**: Demographic and tier data (`customer_id`, `customer_name`, `email`, `loyalty_tier`, `signup_date`).
-- **`dim_products`**: Catalog dimension (`product_id`, `product_name`, `category_id`, `unit_cost`, `retail_price`).
-- **`dim_categories`**: Product classifications (`category_id`, `category_name`, `department`).
-- **`dim_country`**: Geographic hierarchy (`country_id`, `country_name`, `region`, `currency_code`).
-- **`dim_date`**: Comprehensive enterprise calendar table supporting Time Intelligence DAX.
-
----
-
-## ⚙️ ETL & Power Query Pipeline
-
-1. **Extraction & Format Standardization:** Ingested source tabular data from CSV and Excel repositories, ensuring strict type enforcement (`Currency`, `Int64`, `DateTime`).
-2. **Key Harmonization & Surrogate Key Creation:** Generated composite primary keys where applicable and cleansed null values across foreign key columns.
-3. **Derived Attributes & Bucketing:** Created customer loyalty tiers based on historical spend thresholds and generated date-hierarchy columns (`Year`, `Quarter`, `Month`, `MonthName`, `DayOfWeek`).
-4. **Data Quality & Integrity Checks:** Verified 0 orphaned foreign keys between `fact_order_items`, `fact_orders`, and supporting dimension tables.
+Data ingestion, sanitization, and shaping were performed through **Power Query (M)**:
+1. **Source Connection:** Parametric loading from Excel workbooks preserving strict column data types.
+2. **Key Normalization:** Clean surrogate and natural key bindings (, , ).
+3. **Data Integrity Verification:** Elimination of nulls and verification that all fact table transactions map 1:1 to parent dimension tables.
+4. **Behavioral Tier Construction:** Segmentation of customer base into validated loyalty bands (, , , ).
 
 ---
 
 ## 📁 Repository Structure
 
-```
-PULSE-Analytics/
-├── Dashboard Previews/             # High-resolution dashboard screenshots
-│   ├── Country Page.png           # Regional & Geographic Market Penetration
-│   ├── Customer Page.png          # RFM Cohort & Customer Value Analysis
-│   ├── Landing Page.png           # Executive Portal Navigation Hub
-│   ├── Model Page.png             # Snowflake Schema Architecture View
-│   ├── Overview Page.png          # Executive Overview & Core KPIs
-│   ├── Products Page.png          # SKU Assortment & Category Yield
-│   └── Recommendation Page.png    # What-If Predictive Simulation Dashboard
-│
-├── Data/                          # Structured source transactional datasets
-│   ├── dim_categories.csv         # Product category dimension
-│   ├── dim_country.csv            # Geographic & market dimension
-│   ├── dim_customers.csv          # Customer profile & loyalty tier data
-│   ├── dim_date.csv               # Calendar and time dimension
-│   ├── dim_products.csv           # Product catalog and pricing table
-│   ├── fact_order_items.csv       # Line-item order transaction details
-│   └── fact_orders.csv            # Order header records
-│
-├── PULSE.pbip                     # Power BI Project metadata & PBIP definition
-├── PULSE.Report/                  # Tabular report layout, visual definitions & theme
-├── PULSE.SemanticModel/           # Model definition, relationships & TMDL scripts
-├── LICENSE                        # Repository MIT License
-└── README.md                      # Comprehensive project documentation
-```
+
 
 ---
 
-## 🛠️ Tools & Technologies
+## 🛠️ Technology Stack & Analytical Tooling
 
-- 📊 **Power BI Desktop:** Multi-page interactive executive dashboards, dynamic bookmark navigation, and responsive matrix visuals.
-- 📐 **DAX (Data Analysis Expressions):** Complex Time Intelligence (`DATEADD`, `SAMEPERIODLASTMONTH`), ratio metrics, and What-If parameter modeling.
-- 🗄️ **Power BI Project (PBIP) & TMDL:** Modern developer workflow enabling version-controlled tabular metadata.
-- ⚡ **Power Query (M):** Multi-table extraction, schema normalization, and data validation pipeline.
-- 🏗️ **Dimensional Data Modeling:** Star and snowflake schema architectures optimized for analytical query performance.
+- **Microsoft Power BI Desktop:** Visual orchestration, interactive drill-through, UI/UX architecture.
+- **DAX (Data Analysis Expressions):** Time-intelligence, scalar ratios, What-If parameter modeling.
+- **Power Query / M Engine:** Data shaping, type coercion, and star/snowflake modeling.
+- **Microsoft Excel / Python (Pandas & NumPy):** Pre-ingestion validation and metric benchmarking.
+- **Figma:** Canvas wireframing, card grid layout, and executive dashboard iconography.
 
 ---
 
-## 📜 License & Author
+## 👤 Author & Professional Links
 
-- **Author:** Kerelos Nakhla ([GitHub](https://github.com/Kerelos-Nakhla))
-- **Portfolio:** [Kerelos Nakhla Portfolio](https://github.com/Kerelos-Nakhla/Portofolio)
-- **Email:** kerelosnakhlasaad@gmail.com
-- **License:** MIT License
+**Kerelos Nakhla** — *Data Analyst & BI Developer*  
+- 💼 **LinkedIn:** [linkedin.com/in/kerelos-nakhla](https://www.linkedin.com/in/kerelos-nakhla/)  
+- 🐙 **GitHub:** [github.com/Kerelos-Nakhla](https://github.com/Kerelos-Nakhla)  
+- 🌐 **Portfolio Website:** [kerelos-nakhla.github.io/Portofolio](https://kerelos-nakhla.github.io/Portofolio/)  
+- 📧 **Email:** [kerelosnakhlasaad@gmail.com](mailto:kerelosnakhlasaad@gmail.com)
+
+---
+
+## 📄 License
+
+This project is open-source and licensed under the [MIT License](LICENSE).
